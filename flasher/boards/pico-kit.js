@@ -1,11 +1,11 @@
 import { INK, pcb, holes, chip, smd, button, microUsb, text } from "./parts.js";
 
-// Espressif ESP32-PICO-KIT v4.1: 20.3 x 52 mm, drawn upright with micro-USB at the bottom.
+// 乐鑫 ESP32-PICO-KIT v4.1：20.3 x 52 mm，竖着画，micro-USB 在下方。
 const W = 20.3, H = 52;
 const PCB = "#131416";
 
 const TRACE = "#303238";
-// Copper under the solder mask: [what it carries, path, pulse delay in s].
+// 阻焊层下的铜箔：[承载什么, 路径, 脉冲延迟（秒）]。
 const TRACES = [
   ["usb", "M9.7 48.2 V42 L9.2 41.5 V34.1"],
   ["usb", "M10.6 48.2 V42 L11.1 41.5 V34.1", 0.12],

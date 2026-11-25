@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Sanity checks on host/packed before it goes into an image, so a build that
-# "succeeds" with a half-staged payload never reaches a release.
-# Usage: pack/check_packed.sh <version> <upstream tag>   e.g. 0.8.0-pre-627ba8c v0.8.0-pre-627ba8c
+# 进镜像之前先对 host/packed 做体检，免得一次“成功”的构建
+# 带着半截 payload 混进 release。
+# 用法：pack/check_packed.sh <版本> <上游 tag>   例：0.8.0-pre-627ba8c v0.8.0-pre-627ba8c
 set -euo pipefail
 VER=$1
 REF=$2

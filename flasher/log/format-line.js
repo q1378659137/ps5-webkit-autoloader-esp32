@@ -1,10 +1,10 @@
 import { t } from "../language/language.js";
 import { fmtBytes, fmtSec } from "../ui/format.js";
 
-// esptool-js chatter that tells the user nothing.
+// 对用户毫无信息量的 esptool-js 噪声。
 const SKIP = /^(Writing at 0x|Compressed \d|Uploading stub|Running stub|Stub running|Changing baud|Hard resetting|Connecting\.\.\.|Detecting chip|Leaving\.\.\.|Staying in)/i;
 
-// Turns a raw esptool-js line into { text, kind } or null to drop it.
+// 把一行原始 esptool-js 输出变成 { text, kind }，返回 null 表示丢弃。
 export function formatLine(raw) {
   const s = String(raw).replace(/\r/g, "").replace(/\s+/g, " ").trim();
   if (!s || SKIP.test(s)) return null;

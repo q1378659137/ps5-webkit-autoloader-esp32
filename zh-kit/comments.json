@@ -1,0 +1,193 @@
+{
+ "flasher/advanced/sheet.js": {
+  "// The Advanced sheet: a native <dialog>, so Esc, focus and the backdrop come for free.": "// 高级面板：用原生 <dialog>，Esc 关闭、焦点管理和遮罩都是白送的。"
+ },
+ "flasher/app/main.js": {
+  "// What the buttons on each screen do (see wizard/steps.js).": "// 每一屏上按钮各自做什么（见 wizard/steps.js）。"
+ },
+ "flasher/app/state.js": {
+  "// What the page is doing right now. Serial objects live in device/session.js.": "// 页面当前在做什么。串口对象放在 device/session.js。",
+  "// view:  plug | install | move | wifi | guide (the screen shown, see wizard/steps.js)": "// view:  plug | install | move | wifi | guide（当前显示的屏，见 wizard/steps.js）",
+  "// phase: idle | connecting | installing | done | error (the serial link)": "// phase: idle | connecting | installing | done | error（串口链路状态）"
+ },
+ "flasher/app/theme.js": {
+  "// The saved theme is applied before paint by the inline script in index.html.": "// 保存的主题由 index.html 里的内联脚本在首次绘制前套上。"
+ },
+ "flasher/app/url.js": {
+  "// ?lang=es&board=s3&channel=pre makes a link that opens on the right language and board.": "// ?lang=es&board=s3&channel=pre 这样的链接能直接打开到指定语言和板型。",
+  "// The last board picked is also remembered for the next visit.": "// 上次选过的板型也会记住，下次打开还在。"
+ },
+ "flasher/boards/art.js": {
+  "// USB plug and cable hanging below the port. Slides up into the port when plugged.": "// USB 插头与线缆，默认垂在接口下方；插上时滑进接口。",
+  "// Copper traces under the parts, and the pulses that run along them.": "// 元件下方的铜箔走线，以及沿线跑的信号脉冲。",
+  "// Last point of a path like \"M1 2 V3 L4 5 H6\": tracks the pen through M/L/H/V.": "// 形如 \"M1 2 V3 L4 5 H6\" 的路径终点：按 M/L/H/V 逐条跟笔。",
+  "// Copper under the solder mask. Traces that dive to the other layer end in a via.": "// 阻焊层下的铜箔。换层的走线以过孔收尾。",
+  "// The big drawing: board, status LED, BOOT hint, cable and Wi-Fi waves.": "// 大图：开发板、状态灯、BOOT 提示、线缆和 Wi-Fi 波纹。",
+  "// Tight frame so the board fills the stage; waves and cable may spill past it.": "// 取景框收紧，让开发板占满舞台；波纹和线缆允许溢出。",
+  "// The small drawing in the board picker.": "// 板型选择器里的小图。"
+ },
+ "flasher/boards/c3-super-mini.js": {
+  "// ESP32-C3 Super Mini: black, 18 x 22.5 mm, gold castellated pads, ceramic antenna.": "// ESP32-C3 Super Mini：黑色，18 x 22.5 mm，金色半孔焊盘，陶瓷天线。",
+  "// Copper under the solder mask: [what it carries, path, pulse delay in s].": "// 阻焊层下的铜箔：[承载什么, 路径, 脉冲延迟（秒）]。"
+ },
+ "flasher/boards/devkit.js": {
+  "// ESP32 DevKit (DOIT V1 / \"ESP-32S\" clones): black, 28 x 51.5 mm, 2 x 15 pins,": "// ESP32 DevKit（DOIT V1 / \"ESP-32S\" 兼容板）：黑色，28 x 51.5 mm，2 x 15 脚，",
+  "// WROOM-32 module with its antenna at the top, micro-USB between EN and BOOT.": "// WROOM-32 模组，天线在上方，micro-USB 在 EN 和 BOOT 之间。",
+  "// Copper under the solder mask: [what it carries, path, pulse delay in s].": "// 阻焊层下的铜箔：[承载什么, 路径, 脉冲延迟（秒）]。",
+  "// WROOM-32: module PCB with the antenna, then the metal shield.": "// WROOM-32：带天线的模组底板，再往上是金属屏蔽罩。",
+  "// Regulator and USB bridge.": "// 稳压器和 USB 桥。",
+  "// Red power LED on the left, blue GPIO 2 LED on the right.": "// 左边是红色电源灯，右边是接 GPIO 2 的蓝色灯。"
+ },
+ "flasher/boards/parts.js": {
+  "// Drawing pieces for the boards. Units are millimetres, every board is drawn": "// 画开发板用的零件。单位是毫米，每块板都按",
+  "// top-down with its USB port at the bottom edge.": "// 俯视图画，USB 口放在下边缘。",
+  "// A plated through-hole: metal ring with a dark centre.": "// 金属化通孔：金属环加一个暗色中心。",
+  "// Castellated edge pad (C3 Super Mini).": "// 半孔边缘焊盘（C3 Super Mini）。",
+  "// A QFN chip with its pads peeking out on all four sides.": "// QFN 芯片，四边都露出焊盘。",
+  "// Tactile switch seen from above: metal body, dark round plunger.": "// 俯视的轻触开关：金属外壳，中间是深色圆按钮。",
+  "// PCB trace antenna: a meander inside the given box.": "// PCB 走线天线：在给定框内来回折线。"
+ },
+ "flasher/boards/pico-kit.js": {
+  "// Espressif ESP32-PICO-KIT v4.1: 20.3 x 52 mm, drawn upright with micro-USB at the bottom.": "// 乐鑫 ESP32-PICO-KIT v4.1：20.3 x 52 mm，竖着画，micro-USB 在下方。",
+  "// Copper under the solder mask: [what it carries, path, pulse delay in s].": "// 阻焊层下的铜箔：[承载什么, 路径, 脉冲延迟（秒）]。"
+ },
+ "flasher/boards/s2-mini.js": {
+  "// Lolin / TENSTAR S2 Mini: purple, 25.4 x 34.3 mm, two pin rows per side.": "// Lolin / TENSTAR S2 Mini：紫色，25.4 x 34.3 mm，每侧两排针。",
+  "// Copper under the solder mask: [what it carries, path, pulse delay in s].": "// 阻焊层下的铜箔：[承载什么, 路径, 脉冲延迟（秒）]。"
+ },
+ "flasher/boards/s3-devkitc.js": {
+  "// Espressif ESP32-S3-DevKitC-1: 25.4 x 62.7 mm, WROOM-1 module, two USB ports.": "// 乐鑫 ESP32-S3-DevKitC-1：25.4 x 62.7 mm，WROOM-1 模组，两个 USB 口。",
+  "// Copper under the solder mask: [what it carries, path, pulse delay in s].": "// 阻焊层下的铜箔：[承载什么, 路径, 脉冲延迟（秒）]。"
+ },
+ "flasher/device/art.js": {
+  "// The board drawing. Redrawn only when the board changes, so running animations keep going.": "// 开发板绘图。只在换板时重画，这样正在跑的动画不会断。"
+ },
+ "flasher/device/session.js": {
+  "// Native USB boards reject DTR/RTS; that is not an error for us.": "// 原生 USB 的板子不接受 DTR/RTS，这对我们不算错误。",
+  "// esptool-js reports chip details only as log lines.": "// esptool-js 只把芯片信息当日志行输出。",
+  "// USB-serial bridges (CP2102, CH340) start at 115200 and switch up once the stub runs:": "// USB 串口桥（CP2102、CH340）先按 115200 连，跑起 stub 后再升速：",
+  "// 460800 writes the 4 MB image about four times faster and every common bridge handles it.": "// 460800 写 4 MB 镜像大约快四倍，常见桥片都吃得下。",
+  "// Native USB ignores the baud rate, so it stays put there.": "// 原生 USB 不看波特率，所以那边保持不动。"
+ },
+ "flasher/firmware/catalog.js": {
+  "// Board id -> chip it carries. Two boards can share a chip (DevKit and PICO-KIT are both ESP32).": "// 板型 id -> 它用的芯片。两块板可能共用一颗芯片（DevKit 和 PICO-KIT 都是 ESP32）。",
+  "// Picker order: the most common boards first.": "// 选择器顺序：最常见的板型排在前面。",
+  "// What the board is usually sold as.": "// 这块板常见的售卖名称。",
+  "// Board id -> image published by the pages workflow.": "// 板型 id -> pages 工作流发布的镜像。",
+  "// Stable images sit in bin/, the pre-release ones in bin/pre/.": "// 稳定版镜像在 bin/，预发行版在 bin/pre/。",
+  "// The board to use for a detected chip: keep the picked one if it carries that chip.": "// 识别到芯片后该用哪块板：已选板型如果就是这颗芯片，就保留它。"
+ },
+ "flasher/firmware/channel.js": {
+  "// Stable or pre-release. Only shown while a pre-release newer than stable exists.": "// 稳定版还是预发行版。只有在存在比稳定版更新的预发行版时才显示。"
+ },
+ "flasher/firmware/image.js": {
+  "// Rejects tiny files and HTML error pages served in place of a binary.": "// 挡掉过小的文件，以及拿 HTML 错误页冒充二进制的响应。"
+ },
+ "flasher/firmware/picker.js": {
+  "// Once a chip answers, only boards that carry it stay pickable.": "// 芯片一应答，就只留下用这颗芯片的板型可选。"
+ },
+ "flasher/install/flow.js": {
+  "// \"About 2 min left\" or \"About 40 s left\", once there is enough data to guess.": "// 数据够估算了，就显示「大约还要 2 分钟」或「大约还要 40 秒」。",
+  "// Connect, install, disconnect. `render` repaints the page after each phase change.": "// 连接、安装、断开。每次阶段变化后由 `render` 重绘页面。",
+  "// Picking no port goes back to the first screen; anything else shows what to try.": "// 没选端口就退回第一屏；其他错误则提示该怎么办。",
+  "// The board vanished (unplugged or rebooted) while sitting idle.": "// 空等的时候板子掉线了（被拔掉或自己重启了）。"
+ },
+ "flasher/install/help.js": {
+  "// \"Board not showing up?\": the fixes that solve almost every case, then drivers.": "// 「开发板没被识别？」：先给能解决绝大多数情况的几招，再给驱动链接。"
+ },
+ "flasher/install/verify.js": {
+  "// MD5 of the image as esptool-js hands it over (padded Uint8Array), in hex.": "// 镜像的 MD5，按 esptool-js 交过来的形态（补齐过的 Uint8Array）算，十六进制。",
+  "// esptool-js compares it with the MD5 the chip computes over the written flash": "// esptool-js 会拿它和芯片对已写入闪存算出的 MD5 比对，",
+  "// and throws when they differ, so \"Installed\" means verified, not just sent.": "// 不一致就抛错。所以「已安装」代表校验过，不只是发过去了。"
+ },
+ "flasher/install/wake-lock.js": {
+  "// Keeps the screen on during a write so the laptop does not sleep mid-flash.": "// 写入期间保持屏幕常亮，免得笔记本在刷写中途睡着。"
+ },
+ "flasher/install/write.js": {
+  "// Writes a merged image at 0x0 through the open esptool-js session.": "// 通过已打开的 esptool-js 会话，把合并镜像写到 0x0。",
+  "// Deflate on the wire: the empty flash compresses to almost nothing, so a 4 MB image": "// 传输时先用 Deflate 压：空闪存几乎压没了，所以 4 MB 的镜像",
+  "// sends about 2.7 MB. The stub inflates it on the chip.": "// 实际只发约 2.7 MB，由芯片上的 stub 解压。",
+  "// Restarts the chip into the new firmware so nobody has to replug it.": "// 让芯片直接重启进新固件，省得人去插拔。",
+  "// - S2 native USB (USB-OTG CDC): the RTS line does nothing, so trip the RTC watchdog,": "// - S2 的原生 USB（USB-OTG CDC）：RTS 不起作用，于是触发 RTC 看门狗，",
+  "//   the same trick esptool.py uses for this mode.": "//   和 esptool.py 在这个模式下用的招一样。",
+  "// - C3/S3 USB-Serial/JTAG and USB-UART bridges: a hard reset through RTS.": "// - C3/S3 的 USB-Serial/JTAG 和 USB-UART 桥：通过 RTS 硬复位。",
+  "// The board drops off USB as it reboots, so a lost link after the request counts as success.": "// 板子重启时会从 USB 上掉下去，所以请求发出后掉线算成功。",
+  "// Returns true when the reset was sent, false when the user has to press RST.": "// 发出复位返回 true，需要用户自己按 RST 返回 false。"
+ },
+ "flasher/log/format-line.js": {
+  "// esptool-js chatter that tells the user nothing.": "// 对用户毫无信息量的 esptool-js 噪声。",
+  "// Turns a raw esptool-js line into { text, kind } or null to drop it.": "// 把一行原始 esptool-js 输出变成 { text, kind }，返回 null 表示丢弃。"
+ },
+ "flasher/log/log.js": {
+  "// kind: \"\" | \"hi\" (worth reading) | \"bad\" (error)": "// kind: \"\" | \"hi\"（值得一看）| \"bad\"（错误）"
+ },
+ "flasher/ui/dom.js": {
+  "// Copy text with a few product words styled.": "// 复制文本，其中几个产品名带样式。"
+ },
+ "flasher/wizard/steps.js": {
+  "// The five screens, in order. The LEDs light up along this list.": "// 五屏，按顺序排。LED 就按这张表逐个点亮。",
+  "// What one screen shows: the board's scene, the words, and at most one main button.": "// 一屏显示什么：开发板场景、文案，最多一个主按钮。",
+  "// `go` holds the actions: install, next, back, again, help, log, copyLink.": "// `go` 里放动作：install、next、back、again、help、log、copyLink。"
+ },
+ "flasher/wizard/wizard.js": {
+  "// Replay the entrance only when the screen itself changes.": "// 只有换屏时才重放进入动画。",
+  "// \"Board not showing up?\": opens under the button, closes on the next screen.": "// 「开发板没被识别？」：在按钮下方展开，进入下一屏时收起。"
+ },
+ "flasher/advanced/advanced.css": {
+  "/* Advanced: a sheet from the right with everything a first-timer can ignore. */": "/* 高级面板：从右侧滑出的抽屉，新手可以无视的东西都收在这里。 */"
+ },
+ "flasher/boards/boards.css": {
+  "/* Board drawings and the scene animations driven by the wizard's data-scene. */": "/* 开发板绘图，以及由向导的 data-scene 驱动的场景动画。 */",
+  "/* Status LED: off by default, coloured by scene. */": "/* 状态灯：默认熄灭，颜色随场景变化。 */",
+  "/* BOOT hint: a ring that pulses over the button while you hold it. */": "/* BOOT 提示：按住按钮时，上面有一圈脉冲。 */",
+  "/* Cable: hangs below, slides into the port once the board is plugged in. */": "/* 线缆：垂在下方，插上后滑进接口。 */",
+  "/* Signals on the copper: a short bright pulse that runs from the source to the part.": "/* 铜箔上的信号：一段亮脉冲从源头跑到元件。",
+  "/* Wi-Fi waves once the board lives on the PS5. */": "/* 开发板接到 PS5 之后出现的 Wi-Fi 波纹。 */"
+ },
+ "flasher/firmware/firmware.css": {
+  "/* Board picker, version switch, release line, file drop. */": "/* 板型选择器、版本切换、发行版信息行、文件拖放区。 */"
+ },
+ "flasher/log/log.css": {
+  "/* Log console. */": "/* 日志控制台。 */"
+ },
+ "flasher/wizard/wizard.css": {
+  "/* One step at a time: the board, a row of LEDs, one sentence, one button. */": "/* 一次一步：开发板、一排 LED、一句话、一个按钮。 */",
+  "/* Signature: progress as board LEDs. Lit copper for now, green once done. */": "/* 记号：用板上的 LED 表示进度。进行中是亮铜色，完成变绿。 */",
+  "/* Progress: takes the button's place and fills up like one, copper from the left. */": "/* 进度：占住按钮的位置，像按钮一样填满，铜色从左往右。 */",
+  "/* No percentage yet: a short band sweeps across instead. */": "/* 还没有百分比时：用一段短光带扫过去。 */",
+  "/* Each new step fades and rises a little. */": "/* 每一屏切换时淡入并轻轻上浮。 */"
+ },
+ "install-deps.sh": {
+  "# Commands the build needs. CI runners already have them, so apt only runs when one is missing.": "# 构建需要的命令。CI 机器上本来就有，所以只在缺某个时才跑 apt。",
+  "# Current install.sh refuses to create BINDIR itself.": "# 现在的 install.sh 不肯自己建 BINDIR。",
+  "# The index is only needed to install a core; skip the download when both are cached.": "# 索引只在装 core 时才用；两个都缓存了就跳过下载。",
+  "# ESP8266=0 skips the ESP8266 core (CI never builds it).": "# ESP8266=0 会跳过 ESP8266 的 core（CI 从不构建它）。"
+ },
+ "pack/check_packed.sh": {
+  "# Sanity checks on host/packed before it goes into an image, so a build that": "# 进镜像之前先对 host/packed 做体检，免得一次“成功”的构建",
+  "# \"succeeds\" with a half-staged payload never reaches a release.": "# 带着半截 payload 混进 release。",
+  "# Usage: pack/check_packed.sh <version> <upstream tag>   e.g. 0.8.0-pre-627ba8c v0.8.0-pre-627ba8c": "# 用法：pack/check_packed.sh <版本> <上游 tag>   例：0.8.0-pre-627ba8c v0.8.0-pre-627ba8c"
+ },
+ "pack/prepare-data.sh": {
+  "# Terser only reformats here; compression and name mangling are opt-in.": "# 这里 Terser 只做重排版，压缩和改名都是可选项。",
+  "# Payload snippets use a top-level return, and the loader modules use": "# payload 片段用了顶层 return，loader 模块用的是",
+  "# import/export. Neither parses as a classic script, so leave those as-is.": "# import/export。两者都按普通脚本解析不了，所以原样留着。",
+  "# AppCache manifests stay plain for dynamic ESP32 version responses.": "# AppCache 清单保持明文，因为 ESP32 会动态返回版本。"
+ },
+ "pack/pack_payload.py": {
+  "\"\"\"Stage itsPLK/ps5-webkit-autoloader v0.7+ into host/packed.": "\"\"\"Stage q1378659137/ps5-webkit-autoloader v0.7+ into host/packed.",
+  "# 0.8.0 nests Wobkot inside the remote loader; older refs have nothing to fetch here.": "# 0.8.0 把 Wobkot 嵌进了 remote loader；更早的 ref 这里没有东西可抓。",
+  "release = json.loads(fetch(f\"https://api.github.com/repos/itsPLK/ps5-webkit-autoloader/releases/tags/{tag}\"))": "release = json.loads(fetch(f\"https://api.github.com/repos/q1378659137/ps5-webkit-autoloader/releases/tags/{tag}\"))"
+ },
+ "pack/externalize_autoloader.py": {
+  "# Match upstream tools/build_standalone.py and protect script closing tags.": "# 与上游 tools/build_standalone.py 保持一致，并保护 script 的闭合标签。",
+  "# A repeated run verifies extracted files instead of rewriting the page.": "# 重复运行只校验已抽出的文件，不再重写页面。",
+  "# No embedded table means native fetch stays intact. Suppress the upstream": "# 没有内嵌表说明原生 fetch 保持原样。这里压掉上游那条",
+  "# standalone warning: these pages deliberately use external cached files.": "# standalone 警告：这些页面是故意用外部缓存文件的。",
+  "# Validate everything above before any write. Keep backups OUTSIDE LittleFS.": "# 写任何东西之前先把上面全部校验一遍。备份要放在 LittleFS 之外。"
+ },
+ "Makefile": {
+  "# ESP32 DevKit (WROOM-32 / ESP-32S, 30 or 38 pins): the PICO build with the LED on GPIO 2.": "# ESP32 DevKit（WROOM-32 / ESP-32S，30 或 38 脚）：就是 PICO 构建，把 LED 改到 GPIO 2。",
+  "# On WROOM modules GPIO 10 is wired to the flash chip, so it must stay untouched.": "# WROOM 模组上 GPIO 10 接的是闪存芯片，所以不能动它。"
+ }
+}

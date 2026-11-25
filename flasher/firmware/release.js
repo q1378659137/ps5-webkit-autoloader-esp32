@@ -1,18 +1,18 @@
 import { state } from "../app/state.js";
 
-// The pages workflow writes bin/channels.json next to the images:
+// pages 工作流会在镜像旁边写一个 bin/channels.json：
 //   { "stable": { tag, name, date, url }, "pre": { ... } | null }
-// pre is only set while the newest pre-release is newer than stable.
+// 只有最新的预发行版比稳定版新时，pre 才有值。
 const CHANNELS = "bin/channels.json";
-const API = "https://api.github.com/repos/percdotdev/ps5-webkit-autoloader-esp32/releases/latest";
+const API = "https://api.github.com/repos/q1378659137/ps5-webkit-autoloader-esp32/releases/latest";
 const KEY = "release:v1";
 
 function pickFields(j) {
   return j?.tag ? { tag: j.tag, name: j.name, date: j.date, url: j.url } : null;
 }
 
-// Fallback for a local preview without channels.json: stable only, from the API.
-// GitHub allows 60 anonymous calls an hour, so reuse one answer per tab.
+// 本地预览没有 channels.json 时的退路：只取稳定版，走 API。
+// GitHub 匿名调用每小时限 60 次，所以每个标签页复用同一个结果。
 async function loadLatest() {
   try {
     const hit = sessionStorage.getItem(KEY);
@@ -43,14 +43,14 @@ export async function loadChannels() {
   return stable ? { stable, pre: null } : null;
 }
 
-// The release the Install button writes: undefined while loading, null when unknown.
+// 安装按钮要写入的发行版：加载中是 undefined，未知是 null。
 export function selected() {
   const c = state.channels;
   if (c === undefined) return undefined;
   return c?.[state.channel] ?? c?.stable ?? null;
 }
 
-// "itsPLK 0.7.1(f4fab6b)" -> "itsPLK 0.7.1 (f4fab6b)"
+// 把 "itsPLK 0.7.1(f4fab6b)" 规整成 "itsPLK 0.7.1 (f4fab6b)"
 export function payloadLabel(name) {
   return String(name || "").replace(/\s*\(/, " (").trim();
 }

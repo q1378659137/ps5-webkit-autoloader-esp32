@@ -1,11 +1,11 @@
 import { INK, pcb, holes, chip, smd, button, microUsb, traceAntenna, text } from "./parts.js";
 
-// Espressif ESP32-S3-DevKitC-1: 25.4 x 62.7 mm, WROOM-1 module, two USB ports.
+// 乐鑫 ESP32-S3-DevKitC-1：25.4 x 62.7 mm，WROOM-1 模组，两个 USB 口。
 const W = 25.4, H = 62.7;
 const PCB = "#1d1f23";
 
 const TRACE = "#33363c";
-// Copper under the solder mask: [what it carries, path, pulse delay in s].
+// 阻焊层下的铜箔：[承载什么, 路径, 脉冲延迟（秒）]。
 const TRACES = [
   ["usb", "M7.4 58.5 V54.8 L9.6 52.6 V46 L13.4 42.3"],
   ["usb", "M8.3 58.5 V55.2 L10.5 53 V46.4 L14.3 42.3", 0.12],

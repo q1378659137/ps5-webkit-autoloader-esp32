@@ -2,7 +2,7 @@ import { ICON } from "../ui/icons.js";
 
 const $ = (id) => document.getElementById(id);
 
-// The Advanced sheet: a native <dialog>, so Esc, focus and the backdrop come for free.
+// 高级面板：用原生 <dialog>，Esc 关闭、焦点管理和遮罩都是白送的。
 export function wireSheet() {
   const sheet = $("adv");
   $("close-adv").innerHTML = ICON.close;

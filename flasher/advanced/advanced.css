@@ -1,4 +1,4 @@
-/* Advanced: a sheet from the right with everything a first-timer can ignore. */
+/* 高级面板：从右侧滑出的抽屉，新手可以无视的东西都收在这里。 */
 .sheet {
   margin: 0 0 0 auto; padding: 0; height: 100dvh; max-height: none; width: min(440px, 100%);
   border: 0; border-left: 1px solid var(--line); background: var(--panel); color: var(--fg);

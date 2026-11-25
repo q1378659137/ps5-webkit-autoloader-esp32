@@ -123,9 +123,9 @@ void portalSeedManifestVersion()
 bool portalMountStorage()
 {
     if (!LittleFS.begin(false, "/littlefs", 10, "littlefs")) {
-        Serial.println("LittleFS mount failed");
+        Serial.println("LittleFS 挂载失败");
         return false;
     }
-    Serial.println("LittleFS mounted");
+    Serial.println("LittleFS 已挂载");
     return true;
 }

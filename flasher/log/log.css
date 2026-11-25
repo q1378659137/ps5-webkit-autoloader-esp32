@@ -1,4 +1,4 @@
-/* Log console. */
+/* 日志控制台。 */
 .log {
   height: 208px; overflow: auto; padding: 8px 0; border: 1px solid var(--line); border-radius: var(--radius-sm);
   font: 400 12px/20px var(--mono); background: var(--deep);

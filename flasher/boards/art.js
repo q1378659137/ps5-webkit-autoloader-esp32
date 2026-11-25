@@ -6,7 +6,7 @@ import { devkit } from "./devkit.js";
 
 const BOARDS = { s2: s2Mini, devkit, s3: s3DevKitC, c3: c3SuperMini, pico: picoKit };
 
-// USB plug and cable hanging below the port. Slides up into the port when plugged.
+// USB 插头与线缆，默认垂在接口下方；插上时滑进接口。
 function cable(b) {
   const { cx, y, kind } = b.usb;
   const pw = kind === "c" ? 10.6 : 9.4;
@@ -29,8 +29,8 @@ function wifi(b) {
   ).join("") + `</g>`;
 }
 
-// Copper traces under the parts, and the pulses that run along them.
-// Last point of a path like "M1 2 V3 L4 5 H6": tracks the pen through M/L/H/V.
+// 元件下方的铜箔走线，以及沿线跑的信号脉冲。
+// 形如 "M1 2 V3 L4 5 H6" 的路径终点：按 M/L/H/V 逐条跟笔。
 function endOf(d) {
   let x = 0, y = 0;
   for (const [, cmd, args] of d.matchAll(/([MLHV])\s*([-\d.\s]+)/g)) {
@@ -42,7 +42,7 @@ function endOf(d) {
   return [x, y];
 }
 
-// Copper under the solder mask. Traces that dive to the other layer end in a via.
+// 阻焊层下的铜箔。换层的走线以过孔收尾。
 function copper(b) {
   const lines = b.traces.map(([, d]) =>
     `<path d="${d}" fill="none" stroke="${b.trace}" stroke-width="0.34" stroke-linecap="round" stroke-linejoin="round"/>`);
@@ -58,12 +58,12 @@ function signals(b) {
     `<path class="sig sig-${kind}" d="${d}" pathLength="100" style="--d:${delay}s" fill="none" stroke-width="0.5" stroke-linecap="round"/>`).join("") + `</g>`;
 }
 
-// The big drawing: board, status LED, BOOT hint, cable and Wi-Fi waves.
+// 大图：开发板、状态灯、BOOT 提示、线缆和 Wi-Fi 波纹。
 export function boardArt(id) {
   const b = BOARDS[id] || s2Mini;
   const [lx, ly] = b.led;
   const [bx, by] = b.boot;
-  // Tight frame so the board fills the stage; waves and cable may spill past it.
+  // 取景框收紧，让开发板占满舞台；波纹和线缆允许溢出。
   const side = 4, top = 15, bottom = 14;
   return `<svg class="art" viewBox="${-side} ${-top} ${b.w + side * 2} ${b.h + top + bottom}" aria-hidden="true">` +
     `<ellipse class="art-shadow" cx="${b.w / 2}" cy="${b.h + 5}" rx="${b.w * 0.55}" ry="2.4"/>` +
@@ -75,7 +75,7 @@ export function boardArt(id) {
     `</g></svg>`;
 }
 
-// The small drawing in the board picker.
+// 板型选择器里的小图。
 export function boardThumb(id) {
   const b = BOARDS[id] || s2Mini;
   return `<svg class="thumb" viewBox="-1 -1 ${b.w + 2} ${b.h + 2}" aria-hidden="true">${b.pcb}${copper(b)}${b.body}</svg>`;

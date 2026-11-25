@@ -25,20 +25,20 @@ void setup()
     portalLedBegin();
     delay(1000);
 
-    Serial.println("\nBOOT ESP8266");
-    Serial.printf("Core: %s, SDK: %s\n", ESP.getCoreVersion().c_str(), ESP.getSdkVersion());
-    Serial.printf("Reset: %s\n", ESP.getResetReason().c_str());
-    Serial.printf("Flash: configured=%u MB, detected=%u MB, CPU=%u MHz\n",
+    Serial.println("\nESP8266 启动");
+    Serial.printf("内核: %s, SDK: %s\n", ESP.getCoreVersion().c_str(), ESP.getSdkVersion());
+    Serial.printf("复位原因: %s\n", ESP.getResetReason().c_str());
+    Serial.printf("闪存: 配置=%u MB, 检测=%u MB, CPU=%u MHz\n",
                   ESP.getFlashChipSize() / 1024 / 1024,
                   ESP.getFlashChipRealSize() / 1024 / 1024,
                   ESP.getCpuFreqMHz());
 
     if (!LittleFS.begin())
-        Serial.println("LittleFS: FAILED");
+        Serial.println("LittleFS: 挂载失败");
     else {
         FSInfo info;
         LittleFS.info(info);
-        Serial.printf("LittleFS: OK, total=%u, used=%u bytes\n", info.totalBytes, info.usedBytes);
+        Serial.printf("LittleFS: 已挂载, 总计=%u, 已用=%u 字节\n", info.totalBytes, info.usedBytes);
     }
 
     WiFi.persistent(false);
@@ -46,10 +46,10 @@ void setup()
     delay(200);
     WiFi.mode(WIFI_AP);
 
-    Serial.printf("softAPConfig: %s\n",
+    Serial.printf("AP 参数配置: %s\n",
                   WiFi.softAPConfig(AP_IP, AP_GATEWAY, AP_SUBNET) ? "OK" : "FAILED");
     bool ap = WiFi.softAP(PORTAL_AP_SSID, PORTAL_AP_PASSWORD);
-    Serial.printf("softAP: %s\n", ap ? "OK" : "FAILED");
+    Serial.printf("热点启动: %s\n", ap ? "OK" : "FAILED");
     if (!ap) {
         portalLedError();
         while (true) {
@@ -58,24 +58,24 @@ void setup()
         }
     }
 
-    Serial.printf("AP IP: %s\n", WiFi.softAPIP().toString().c_str());
+    Serial.printf("AP 地址: %s\n", WiFi.softAPIP().toString().c_str());
     Serial.printf("SSID: %s\n", WiFi.softAPSSID().c_str());
-    Serial.printf("Channel: %d\n", WiFi.channel());
+    Serial.printf("信道: %d\n", WiFi.channel());
     Serial.printf("MAC: %s\n", WiFi.softAPmacAddress().c_str());
     Serial.printf("DNS: %s\n", dnsServer.start(53, "*", AP_IP) ? "OK" : "FAILED");
 
-    Serial.println("Starting HTTP");
+    Serial.println("正在启动 HTTP 服务");
     portalSetupRoutes(webServer);
-    portalLogHeap("HTTP ready");
+    portalLogHeap("HTTP 就绪");
 
-    Serial.println("Starting HTTPS");
+    Serial.println("正在启动 HTTPS 服务");
     static BearSSL::X509List serverCertificate((const char *)server_crt);
     static BearSSL::PrivateKey serverPrivateKey((const char *)server_key);
     httpsServer.getServer().setECCert(
         &serverCertificate, BR_KEYTYPE_KEYX | BR_KEYTYPE_SIGN, &serverPrivateKey);
     portalSetupRoutes(httpsServer);
-    portalLogHeap("HTTPS ready");
-    Serial.println("READY");
+    portalLogHeap("HTTPS 就绪");
+    Serial.println("准备就绪");
     portalLedReady();
 }
 

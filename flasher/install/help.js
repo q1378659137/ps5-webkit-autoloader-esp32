@@ -6,7 +6,7 @@ const DRIVERS = [
   ["CH340", "https://www.wch-ic.com/downloads/CH341SER_EXE.html"],
 ];
 
-// "Board not showing up?": the fixes that solve almost every case, then drivers.
+// 「开发板没被识别？」：先给能解决绝大多数情况的几招，再给驱动链接。
 export function helpContent() {
   const [a, b] = DRIVERS.map(([name, href]) => el("a", { href, target: "_blank", rel: "noopener" }, name));
   return [

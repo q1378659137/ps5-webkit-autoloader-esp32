@@ -1,11 +1,11 @@
 import { INK, pcb, edgePad, chip, smd, crystal, button, usbC, text } from "./parts.js";
 
-// ESP32-C3 Super Mini: black, 18 x 22.5 mm, gold castellated pads, ceramic antenna.
+// ESP32-C3 Super Mini：黑色，18 x 22.5 mm，金色半孔焊盘，陶瓷天线。
 const W = 18, H = 22.5;
 const PCB = "#16171a";
 
 const TRACE = "#303239";
-// Copper under the solder mask: [what it carries, path, pulse delay in s].
+// 阻焊层下的铜箔：[承载什么, 路径, 脉冲延迟（秒）]。
 const TRACES = [
   ["usb", "M8.6 18.2 V13.4 L9.6 12.4 V10.7"],
   ["usb", "M9.6 18.2 V13.8 L10.4 13 V10.7", 0.12],

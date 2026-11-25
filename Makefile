@@ -143,8 +143,8 @@ PICO_APP := $(PICO_BUILD_DIR)/$(PROJECT_NAME).ino.bin
 PICO_BOOTLOADER := $(PICO_BUILD_DIR)/$(PROJECT_NAME).ino.bootloader.bin
 PICO_PARTITIONS := $(PICO_BUILD_DIR)/$(PROJECT_NAME).ino.partitions.bin
 PICO_MERGED := $(PICO_BUILD_DIR)/$(PROJECT_NAME).pico.merged.bin
-# ESP32 DevKit (WROOM-32 / ESP-32S, 30 or 38 pins): the PICO build with the LED on GPIO 2.
-# On WROOM modules GPIO 10 is wired to the flash chip, so it must stay untouched.
+# ESP32 DevKit（WROOM-32 / ESP-32S，30 或 38 脚）：就是 PICO 构建，把 LED 改到 GPIO 2。
+# WROOM 模组上 GPIO 10 接的是闪存芯片，所以不能动它。
 DEVKIT_APP := $(DEVKIT_BUILD_DIR)/$(PROJECT_NAME).ino.bin
 DEVKIT_BOOTLOADER := $(DEVKIT_BUILD_DIR)/$(PROJECT_NAME).ino.bootloader.bin
 DEVKIT_PARTITIONS := $(DEVKIT_BUILD_DIR)/$(PROJECT_NAME).ino.partitions.bin

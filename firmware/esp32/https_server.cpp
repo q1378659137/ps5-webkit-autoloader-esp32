@@ -37,8 +37,8 @@ static void logTlsMemory(const char *stage)
 
 static void httpsSessionCreated(esp_https_server_user_cb_arg_t *event)
 {
-    Serial.printf("[TLS] handshake OK: fd=%d\n", event->tls->sockfd);
-    logTlsMemory("after handshake");
+    Serial.printf("[TLS] 握手成功: fd=%d\n", event->tls->sockfd);
+    logTlsMemory("握手完成");
 }
 
 static const char *clientHelloSni(const uint8_t *data, size_t size,
@@ -105,12 +105,12 @@ extern "C" int __wrap_esp_tls_server_session_create(esp_tls_cfg_server_t *cfg,
 {
     char host[256];
     const char *sni = probeClientHelloSni(sockfd, host, sizeof(host));
-    Serial.printf("[TLS] ClientHello fd=%d sni=%s\n", sockfd, sni);
-    logTlsMemory("before handshake");
+    Serial.printf("[TLS] 收到 ClientHello fd=%d sni=%s\n", sockfd, sni);
+    logTlsMemory("握手前");
     int result = __real_esp_tls_server_session_create(cfg, sockfd, tls);
-    Serial.printf("[TLS] handshake fd=%d sni=%s result=%d\n", sockfd, sni, result);
+    Serial.printf("[TLS] 握手 fd=%d sni=%s result=%d\n", sockfd, sni, result);
     if (result != 0)
-        logTlsMemory("handshake failed");
+        logTlsMemory("握手失败");
     return result;
 }
 #endif
@@ -132,7 +132,7 @@ static void setHttpsNoCacheHeaders(httpd_req_t *req)
 static esp_err_t httpsFileHandler(httpd_req_t *req)
 {
     portalLedActivity();
-    portalLogHeap("HTTPS file begin");
+    portalLogHeap("开始发送文件");
 
     Serial.printf("[HTTPS] method=%d uri=%s\n", req->method, req->uri);
 
@@ -200,8 +200,8 @@ static esp_err_t httpsFileHandler(httpd_req_t *req)
 
         Serial.print("\n");
         httpd_resp_set_status(req, "404 Not Found");
-        httpd_resp_set_type(req, "text/plain");
-        httpd_resp_send(req, "404 Not Found", HTTPD_RESP_USE_STRLEN);
+        httpd_resp_set_type(req, "text/plain; charset=utf-8");
+        httpd_resp_send(req, "404：页面不存在", HTTPD_RESP_USE_STRLEN);
         return ESP_OK;
     }
 
@@ -212,7 +212,7 @@ static esp_err_t httpsFileHandler(httpd_req_t *req)
         setHttpsNoCacheHeaders(req);
         httpd_resp_set_type(req, "text/cache-manifest; charset=utf-8");
         esp_err_t result = httpd_resp_send(req, manifest.c_str(), manifest.length());
-        portalLogHeap("HTTPS manifest end");
+        portalLogHeap("清单发送完成");
         return result;
     }
 
@@ -234,14 +234,14 @@ static esp_err_t httpsFileHandler(httpd_req_t *req)
 
     file.close();
     httpd_resp_send_chunk(req, NULL, 0);
-    portalLogHeap("HTTPS file end");
+    portalLogHeap("文件发送完成");
     return ESP_OK;
 }
 
 static esp_err_t httpsFixedUrlHandler(httpd_req_t *req)
 {
     portalLedActivity();
-    portalLogHeap("HTTPS fixed URL");
+    portalLogHeap("固定探测路径");
     setHttpsNoCacheHeaders(req);
 
     String uri = req->uri;
@@ -269,7 +269,7 @@ static esp_err_t httpsFixedUrlHandler(httpd_req_t *req)
 static esp_err_t httpsNetworkTestHandler(httpd_req_t *req)
 {
     portalLedActivity();
-    portalLogHeap("HTTPS network test");
+    portalLogHeap("网络连通性测试");
     Serial.printf(
         "[HTTPS %s] uri=%s content_len=%d\n",
         req->method == HTTP_GET ? "GET" : "POST",
@@ -301,7 +301,7 @@ bool portalStartHttps()
     httpd_ssl_config_t config = HTTPD_SSL_CONFIG_DEFAULT();
 #if USB_DEBUG
     config.user_cb = httpsSessionCreated;
-    logTlsMemory("before HTTPS start");
+    logTlsMemory("HTTPS 启动前");
 #endif
 
     config.transport_mode = HTTPD_SSL_TRANSPORT_SECURE;
@@ -313,24 +313,24 @@ bool portalStartHttps()
     config.httpd.uri_match_fn = httpd_uri_match_wildcard;
     config.httpd.max_uri_handlers = 12;
 
-    Serial.printf("cert len: %u, last: %02X\n",
+    Serial.printf("证书长度: %u, 末字节: %02X\n",
                   (unsigned)server_crt_len, server_crt[server_crt_len - 1]);
-    Serial.printf("key len: %u, last: %02X\n",
+    Serial.printf("密钥长度: %u, 末字节: %02X\n",
                   (unsigned)server_key_len, server_key[server_key_len - 1]);
-    Serial.println("Starting httpd_ssl_start...");
+    Serial.println("正在启动 httpd_ssl_start…");
 
     esp_err_t err = httpd_ssl_start(&httpsServer, &config);
     if (err != ESP_OK) {
 #if USB_DEBUG
-        logTlsMemory("HTTPS start failed");
+        logTlsMemory("HTTPS 启动失败");
 #endif
-        Serial.printf("HTTPS start failed: %s\n", esp_err_to_name(err));
+        Serial.printf("HTTPS 启动失败: %s\n", esp_err_to_name(err));
         return false;
     }
 
-    Serial.println("HTTPS socket started");
+    Serial.println("HTTPS 套接字已启动");
 #if USB_DEBUG
-    logTlsMemory("HTTPS listening");
+    logTlsMemory("HTTPS 监听中");
 #endif
 
     httpd_uri_t netstart_uri = {
@@ -386,7 +386,7 @@ bool portalStartHttps()
         if (err != ESP_OK)
         {
             Serial.printf(
-                "HTTPS route registration failed: method=%d uri=%s error=%s\n",
+                "HTTPS 路由注册失败: method=%d uri=%s error=%s\n",
                 handlers[i]->method, handlers[i]->uri, esp_err_to_name(err)
             );
             httpd_ssl_stop(httpsServer);
@@ -395,6 +395,6 @@ bool portalStartHttps()
         }
     }
 
-    Serial.println("HTTPS: OK");
+    Serial.println("HTTPS 已启动");
     return true;
 }

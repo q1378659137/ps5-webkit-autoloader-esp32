@@ -9,7 +9,7 @@ import { showProgress, endProgress, hideProgress } from "./progress.js";
 import { holdAwake, releaseAwake } from "./wake-lock.js";
 import { writeImage, startFirmware } from "./write.js";
 
-// "About 2 min left" or "About 40 s left", once there is enough data to guess.
+// 数据够估算了，就显示「大约还要 2 分钟」或「大约还要 40 秒」。
 function timeLeft(started, f) {
   const spent = (Date.now() - started) / 1000;
   if (f < 0.05 || spent < 3) return t("phWrite");
@@ -30,7 +30,7 @@ function errorText(err) {
   return t("fail");
 }
 
-// Connect, install, disconnect. `render` repaints the page after each phase change.
+// 连接、安装、断开。每次阶段变化后由 `render` 重绘页面。
 export function createFlow(render) {
   async function attach() {
     state.phase = "connecting";
@@ -41,7 +41,7 @@ export function createFlow(render) {
     render();
   }
 
-  // Picking no port goes back to the first screen; anything else shows what to try.
+  // 没选端口就退回第一屏；其他错误则提示该怎么办。
   async function fail(err) {
     await dropSession();
     logLine(String(err?.message || err), "bad");
@@ -132,7 +132,7 @@ export function createFlow(render) {
     render();
   }
 
-  // The board vanished (unplugged or rebooted) while sitting idle.
+  // 空等的时候板子掉线了（被拔掉或自己重启了）。
   async function lost(port) {
     if (state.busy || port !== session.port) return;
     await dropSession();

@@ -2,7 +2,7 @@ import { state } from "../app/state.js";
 import { t } from "../language/language.js";
 import { el } from "../ui/dom.js";
 
-// Stable or pre-release. Only shown while a pre-release newer than stable exists.
+// 稳定版还是预发行版。只有在存在比稳定版更新的预发行版时才显示。
 export function renderChannel(root, onPick) {
   const c = state.channels;
   root.hidden = !c?.pre;

@@ -17,7 +17,7 @@ else
     SUDO="sudo"
 fi
 
-# Commands the build needs. CI runners already have them, so apt only runs when one is missing.
+# 构建需要的命令。CI 机器上本来就有，所以只在缺某个时才跑 apt。
 NEED=(curl git openssl python3 unzip xz)
 PKGS=(ca-certificates curl git openssl python3 unzip xz-utils)
 if [ "${COMPILE_ONLY:-0}" != 1 ]; then
@@ -49,7 +49,7 @@ if ! command -v arduino-cli >/dev/null 2>&1; then
         https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh \
         -o "$TMP_DIR/install.sh"
 
-    # Current install.sh refuses to create BINDIR itself.
+    # 现在的 install.sh 不肯自己建 BINDIR。
     mkdir -p "$TMP_DIR/bin"
     BINDIR="$TMP_DIR/bin" sh "$TMP_DIR/install.sh"
 
@@ -76,8 +76,8 @@ ARDUINO_CLI=(
     --config-file "$ARDUINO_CONFIG"
 )
 
-# The index is only needed to install a core; skip the download when both are cached.
-# ESP8266=0 skips the ESP8266 core (CI never builds it).
+# 索引只在装 core 时才用；两个都缓存了就跳过下载。
+# ESP8266=0 会跳过 ESP8266 的 core（CI 从不构建它）。
 install_core() {
     local core=$1 version=$2 installed
     installed="$("${ARDUINO_CLI[@]}" core list | awk -v c="$core" '$1 == c {print $2}')"

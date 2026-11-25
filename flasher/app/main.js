@@ -30,7 +30,7 @@ function goView(delta) {
   render();
 }
 
-// What the buttons on each screen do (see wizard/steps.js).
+// 每一屏上按钮各自做什么（见 wizard/steps.js）。
 const go = {
   install: () => { closeExtra(); flow.install(); },
   next: () => goView(1),

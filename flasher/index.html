@@ -1,29 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
   <meta name="theme-color" content="#141415">
   <title>PS5 WebKit Autoloader</title>
-  <meta name="description" content="Write the PS5 WebKit Autoloader firmware to an ESP32, then join ESP32_PORTAL on the console and open the User’s Guide.">
+  <meta name="description" content="在浏览器里把 PS5 WebKit Autoloader 固件写入 ESP32，然后在 PS5 上打开使用说明书。">
   <link rel="canonical" href="https://percdotdev.github.io/ps5-webkit-autoloader-esp32/">
   <meta property="og:type" content="website">
-  <meta property="og:locale" content="en_US">
+  <meta property="og:locale" content="zh_CN">
   <meta property="og:site_name" content="PS5 WebKit Autoloader">
   <meta property="og:title" content="PS5 WebKit Autoloader">
-  <meta property="og:description" content="Write the PS5 WebKit Autoloader firmware to an ESP32, then join ESP32_PORTAL on the console and open the User’s Guide.">
+  <meta property="og:description" content="在浏览器里把 PS5 WebKit Autoloader 固件写入 ESP32，然后在 PS5 上打开使用说明书。">
   <meta property="og:url" content="https://percdotdev.github.io/ps5-webkit-autoloader-esp32/">
   <meta property="og:image" content="https://percdotdev.github.io/ps5-webkit-autoloader-esp32/share/og.png?v=2">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="PS5 WebKit Autoloader for ESP32 — flash, join ESP32_PORTAL, open User’s Guide.">
+  <meta property="og:image:alt" content="适用于 ESP32 的 PS5 WebKit Autoloader —— 刷写、连 ESP32_PORTAL、打开使用说明书。">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="PS5 WebKit Autoloader">
-  <meta name="twitter:description" content="Write the PS5 WebKit Autoloader firmware to an ESP32, then join ESP32_PORTAL on the console and open the User’s Guide.">
+  <meta name="twitter:description" content="在浏览器里把 PS5 WebKit Autoloader 固件写入 ESP32，然后在 PS5 上打开使用说明书。">
   <meta name="twitter:image" content="https://percdotdev.github.io/ps5-webkit-autoloader-esp32/share/og.png?v=2">
-  <meta name="twitter:image:alt" content="PS5 WebKit Autoloader for ESP32 — flash, join ESP32_PORTAL, open User’s Guide.">
+  <meta name="twitter:image:alt" content="适用于 ESP32 的 PS5 WebKit Autoloader —— 刷写、连 ESP32_PORTAL、打开使用说明书。">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='2' y='2' width='20' height='20' rx='6' fill='%23111114'/%3E%3Cpath d='M8 8.5h5.5a2.5 2.5 0 0 1 0 5H10V16' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,7 +44,7 @@
   <link rel="stylesheet" href="./log/log.css">
 </head>
 <body>
-  <a class="skip" href="#main" id="skip">Skip to content</a>
+  <a class="skip" href="#main" id="skip">跳到正文</a>
 
   <header class="top">
     <a class="brand" href="./">
@@ -52,11 +52,12 @@
       <span>WebKit Autoloader</span>
     </a>
     <div class="top-tools">
-      <div class="seg" role="group" aria-label="Language">
+      <div class="seg" role="group" aria-label="语言">
         <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
         <button type="button" data-set-lang="es" aria-pressed="false">ES</button>
+        <button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
       </div>
-      <button type="button" class="icon-btn" id="theme" aria-label="Toggle theme"></button>
+      <button type="button" class="icon-btn" id="theme" aria-label="切换主题"></button>
       <a class="gh" id="gh" href="https://github.com/percdotdev/ps5-webkit-autoloader-esp32" aria-label="GitHub"><span class="gh-ic" id="gh-ic"></span></a>
     </div>
   </header>
@@ -80,8 +81,8 @@
     <span id="foot-note"></span>
     <nav>
       <button type="button" class="foot-btn" id="open-adv"></button>
-      <a id="foot-src" href="https://github.com/percdotdev/ps5-webkit-autoloader-esp32"></a>
-      <a href="https://github.com/itsPLK/ps5-webkit-autoloader">itsPLK</a>
+      <a id="foot-src" href="https://github.com/q1378659137/ps5-webkit-autoloader-esp32"></a>
+      <a href="https://github.com/q1378659137/ps5-webkit-autoloader">Payload</a>
     </nav>
   </footer>
 

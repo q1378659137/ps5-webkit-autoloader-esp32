@@ -2,8 +2,8 @@ import { isBoard } from "../firmware/catalog.js";
 import { pickLang } from "../language/language.js";
 import { state } from "./state.js";
 
-// ?lang=es&board=s3&channel=pre makes a link that opens on the right language and board.
-// The last board picked is also remembered for the next visit.
+// ?lang=es&board=s3&channel=pre 这样的链接能直接打开到指定语言和板型。
+// 上次选过的板型也会记住，下次打开还在。
 export function readUrl() {
   const q = new URLSearchParams(location.search);
   let saved = null;

@@ -1,6 +1,6 @@
-// What the page is doing right now. Serial objects live in device/session.js.
-// view:  plug | install | move | wifi | guide (the screen shown, see wizard/steps.js)
-// phase: idle | connecting | installing | done | error (the serial link)
+// 页面当前在做什么。串口对象放在 device/session.js。
+// view:  plug | install | move | wifi | guide（当前显示的屏，见 wizard/steps.js）
+// phase: idle | connecting | installing | done | error（串口链路状态）
 export const state = {
   lang: "en",
   view: "plug",

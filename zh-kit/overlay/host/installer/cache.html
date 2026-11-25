@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-CN" manifest="/cache.appcache">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebKit Autoloader 安装器 v[[VERSION_PLACEHOLDER]]（PLK 构建，[[BUILD_TIME_PLACEHOLDER]]）</title>
+  <style>
+    * { margin: 0; padding: 0; -webkit-box-sizing: border-box; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      min-height: 100%;
+      text-align: center;
+    }
+    main { max-width: 42rem; width: 100%; padding: 2rem; }
+    .logo { display: inline-block; width: 8rem; height: 8rem; margin-bottom: 2rem; }
+    h1 { font-size: 2.5rem; font-weight: 600; letter-spacing: 0.02em; margin-bottom: 1rem; }
+    p { font-size: 1.375rem; line-height: 1.5; color: #94a3b8; }
+    #status { font-size: 1.5rem; font-weight: 500; color: #38bdf8; margin-bottom: 0.5rem; }
+    #status.success { color: #22c55e; }
+    #status.error { color: #ef4444; }
+    #detail { white-space: pre-line; }
+    #progress {
+      position: relative; width: 100%; max-width: 30rem; height: 1.25rem;
+      margin: 1.75rem auto 0; background: #1b2436; border: 1px solid #2c3e5a;
+      border-radius: 8px; overflow: hidden;
+    }
+    #progressBar {
+      position: absolute; top: 0; left: 0; height: 100%; width: 100%;
+      background: #38bdf8;
+      -webkit-transform: scaleX(0); transform: scaleX(0);
+      -webkit-transform-origin: left center; transform-origin: left center;
+    }
+    #percent {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      color: #fff; font-size: 0.8rem; font-weight: 600; line-height: 1.25rem;
+    }
+    #progress.success #progressBar { background: #22c55e; }
+    #progress.error #progressBar { background: #ef4444; }
+    #footer {
+      position: fixed; bottom: 12px; left: 50%;
+      -webkit-transform: translateX(-50%); transform: translateX(-50%);
+      font-size: 0.75rem; color: #4b5563; line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <img class="logo" src="/logo.svg" alt="WebKit Autoloader">
+    <h1>WebKit Autoloader 安装器</h1>
+    <p id="status">正在缓存内容…</p>
+    <p id="detail">请稍等片刻，先不要关闭这个页面！</p>
+    <div id="progress" role="progressbar" aria-label="缓存下载进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div id="progressBar"></div>
+      <div id="percent">0%</div>
+    </div>
+  </main>
+  <footer id="footer">WebKit Autoloader 安装器 v[[VERSION_PLACEHOLDER]]（PLK 构建，[[BUILD_TIME_PLACEHOLDER]]）<br>本项目免费开源：github.com/q1378659137/ps5-webkit-autoloader</footer>
+  <script>
+  (function () {
+    var status = document.getElementById('status');
+    var detail = document.getElementById('detail');
+    var progress = document.getElementById('progress');
+    var progressBar = document.getElementById('progressBar');
+    var percent = document.getElementById('percent');
+    var cache = window.applicationCache;
+    var version = '[[VERSION_PLACEHOLDER]]';
+    var failed = false;
+    var downloading = false;
+    var ready = false;
+
+    function setProgress(value) {
+      progress.className = '';
+      progress.setAttribute('aria-valuenow', value);
+      progressBar.style.webkitTransform = 'scaleX(' + value / 100 + ')';
+      progressBar.style.transform = 'scaleX(' + value / 100 + ')';
+      percent.textContent = value + '%';
+    }
+
+    function fail(message) {
+      if (failed || ready) return;
+      failed = true;
+      status.textContent = message;
+      status.className = 'error';
+      detail.textContent = '请连上 ESP32，然后重新加载本页再试一次。';
+      progress.className = 'error';
+    }
+
+    function launch() {
+      if (failed || ready) return;
+      ready = true;
+      setProgress(100);
+      status.textContent = '正在校验离线缓存…';
+      fetch('/app/' + version + '/__complete__')
+        .then(function (response) { return response.text(); })
+        .then(function (marker) {
+          if (marker.trim() !== version) throw new Error('缓存不完整。请再运行一次安装器。');
+          status.textContent = '离线缓存已就绪';
+          status.className = 'success';
+          progress.className = 'success';
+          detail.textContent = '正在启动安装器，请保持本页打开。';
+          location.replace('/app/index.html');
+        })
+        .catch(function (error) { fail(error.message || '缓存不完整。请再运行一次安装器。'); });
+    }
+
+    if (!cache) {
+      status.textContent = '这个浏览器不支持离线 AppCache。';
+      detail.textContent = '';
+      progress.style.display = 'none';
+      return;
+    }
+    cache.addEventListener('downloading', function () { downloading = true; });
+    cache.addEventListener('progress', function (event) {
+      if (failed || ready || !event.total) return;
+      setProgress(Math.min(99, Math.round(event.loaded * 100 / event.total)));
+    });
+    cache.addEventListener('cached', function () { downloading = false; launch(); });
+    cache.addEventListener('noupdate', function () { downloading = false; launch(); });
+    cache.addEventListener('updateready', function () {
+      if (failed || ready) return;
+      downloading = false;
+      if (cache.status === cache.UPDATEREADY) {
+        try { cache.swapCache(); } catch (error) { }
+      }
+      launch();
+    });
+    cache.addEventListener('error', function () {
+      if (failed || ready) return;
+      fail(downloading
+        ? '缓存下载失败。请再运行一次安装器。'
+        : '离线缓存校验失败。请再运行一次安装器。');
+    });
+    cache.addEventListener('obsolete', function () {
+      fail('缓存的清单已被更新取代。请重新运行安装器以完成。');
+    });
+  })();
+  </script>
+</body>
+</html>

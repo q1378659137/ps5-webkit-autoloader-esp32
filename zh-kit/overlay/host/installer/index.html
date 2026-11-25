@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebKit Autoloader 安装器 v[[VERSION_PLACEHOLDER]]（PLK 构建，[[BUILD_TIME_PLACEHOLDER]]）</title>
+  <style>
+    * { margin: 0; padding: 0; -webkit-box-sizing: border-box; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      min-height: 100%;
+      text-align: center;
+    }
+    main { max-width: 42rem; width: 100%; padding: 2rem; }
+    .logo { display: inline-block; width: 8rem; height: 8rem; margin-bottom: 2rem; }
+    h1 { font-size: 2.5rem; font-weight: 600; letter-spacing: 0.02em; margin-bottom: 1rem; }
+    p { font-size: 1.375rem; line-height: 1.5; color: #94a3b8; }
+    #status { font-size: 1.5rem; font-weight: 500; color: #38bdf8; margin-bottom: 0.5rem; }
+    #status.error { color: #ef4444; }
+    #detail { white-space: pre-line; }
+    #footer {
+      position: fixed; bottom: 12px; left: 50%;
+      -webkit-transform: translateX(-50%); transform: translateX(-50%);
+      font-size: 0.75rem; color: #4b5563; line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <img class="logo" src="/logo.svg" alt="WebKit Autoloader">
+    <h1>WebKit Autoloader 安装器</h1>
+    <p id="status">正在准备缓存…</p>
+    <p id="detail">请稍等片刻，先不要关闭这个页面！</p>
+  </main>
+  <footer id="footer">WebKit Autoloader 安装器 v[[VERSION_PLACEHOLDER]]（PLK 构建，[[BUILD_TIME_PLACEHOLDER]]）<br>本项目免费开源：github.com/q1378659137/ps5-webkit-autoloader</footer>
+  <script>
+  (function () {
+    var status = document.getElementById('status');
+    var detail = document.getElementById('detail');
+    var match = /PlayStation 5\/(\d+\.\d+)/.exec(navigator.userAgent);
+    var fw = match ? parseFloat(match[1]) : 0;
+    var is905 = match ? (match[1] === '9.05' || Math.abs(fw - 9.05) < 0.001) : false;
+    var hasPoops = fw >= 7 && fw <= 12;
+    var hasRelapse = fw >= 7 && fw <= 13.60 && !is905;
+    if (match && !hasPoops && !hasRelapse) {
+      status.textContent = '不支持的固件 ' + match[1];
+      status.className = 'error';
+      detail.textContent = '支持范围：7.00–12.00 走 Poops，7.00–13.60 走 Relapse（9.05 除外）。';
+      return;
+    }
+    status.textContent = '正在准备缓存…';
+    location.replace('/cache.html');
+  })();
+  </script>
+</body>
+</html>

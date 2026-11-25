@@ -27,7 +27,7 @@ static void portalLogRequest(Server &server)
 template <typename Server>
 static void portalFileHandler(Server &server)
 {
-    portalLogHeap("file begin");
+    portalLogHeap("开始发送文件");
     portalLogRequest(server);
     String path = portalNormalizePath(server.uri());
 
@@ -59,7 +59,7 @@ static void portalFileHandler(Server &server)
             server.sendHeader("Location", PORTAL_REDIRECT_URL, true);
             server.send(302, "text/plain", "");
         } else {
-            server.send(404, "text/plain", "404 Not Found");
+            server.send(404, "text/plain; charset=utf-8", "404：页面不存在");
         }
         return;
     }
@@ -69,7 +69,7 @@ static void portalFileHandler(Server &server)
         server.sendHeader("Content-Encoding", "gzip");
     server.streamFile(file, type);
     file.close();
-    portalLogHeap("file end");
+    portalLogHeap("文件发送完成");
 }
 
 template <typename Server>

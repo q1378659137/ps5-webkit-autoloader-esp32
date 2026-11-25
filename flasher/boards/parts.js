@@ -1,5 +1,5 @@
-// Drawing pieces for the boards. Units are millimetres, every board is drawn
-// top-down with its USB port at the bottom edge.
+// 画开发板用的零件。单位是毫米，每块板都按
+// 俯视图画，USB 口放在下边缘。
 
 export const INK = {
   gold: "#d6a84a", goldDark: "#9c7428", silver: "#cfd3d9", silverDark: "#8d939c",
@@ -14,7 +14,7 @@ export function pcb(w, h, fill, radius = 1.4) {
     `<rect x="0.35" y="0.35" width="${r2(w - 0.7)}" height="${r2(h - 0.7)}" rx="${radius}" fill="none" stroke="#ffffff" stroke-opacity="0.07" stroke-width="0.35"/>`;
 }
 
-// A plated through-hole: metal ring with a dark centre.
+// 金属化通孔：金属环加一个暗色中心。
 export function hole(x, y, ring = INK.gold, r = 0.8) {
   return `<circle cx="${r2(x)}" cy="${r2(y)}" r="${r}" fill="${ring}"/><circle cx="${r2(x)}" cy="${r2(y)}" r="${r2(r * 0.5)}" fill="${INK.hole}"/>`;
 }
@@ -23,7 +23,7 @@ export function holes(x, y0, count, ring, pitch = 2.54) {
   return Array.from({ length: count }, (_, i) => hole(x, y0 + i * pitch, typeof ring === "function" ? ring(i) : ring)).join("");
 }
 
-// Castellated edge pad (C3 Super Mini).
+// 半孔边缘焊盘（C3 Super Mini）。
 export function edgePad(x, y, side) {
   const w = 2.3, h = 1.8;
   const px = side === "left" ? x : x - w;
@@ -31,7 +31,7 @@ export function edgePad(x, y, side) {
     `<circle cx="${r2(x + (side === "left" ? 0.2 : -0.2))}" cy="${r2(y)}" r="0.55" fill="${INK.hole}"/>`;
 }
 
-// A QFN chip with its pads peeking out on all four sides.
+// QFN 芯片，四边都露出焊盘。
 export function chip(x, y, s, { label = "", fs = 0.8, rotate = 0, dot = true } = {}) {
   const pads = [];
   const n = Math.max(4, Math.round(s * 1.4));
@@ -65,7 +65,7 @@ export function crystal(x, y, w, h, label = "") {
     (label ? text(x + w / 2, y + h / 2 + 0.2, label, 0.55, "#5d6168") : "");
 }
 
-// Tactile switch seen from above: metal body, dark round plunger.
+// 俯视的轻触开关：金属外壳，中间是深色圆按钮。
 export function button(x, y, w = 3.4, h = 2.8) {
   return `<g class="btn-switch"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="0.4" fill="${INK.silver}" stroke="${INK.silverDark}" stroke-width="0.15"/>` +
     `<circle class="btn-cap" cx="${r2(x + w / 2)}" cy="${r2(y + h / 2)}" r="${r2(Math.min(w, h) * 0.3)}" fill="#3a3c41"/></g>`;
@@ -83,7 +83,7 @@ export function microUsb(cx, y) {
     `<rect x="${r2(cx - 2.6)}" y="${r2(y + h - 1.5)}" width="5.2" height="0.7" rx="0.3" fill="#2a2c30"/>`;
 }
 
-// PCB trace antenna: a meander inside the given box.
+// PCB 走线天线：在给定框内来回折线。
 export function traceAntenna(x, y, w, h, color) {
   const steps = 7;
   const dx = w / steps;

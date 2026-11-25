@@ -1,4 +1,4 @@
-/* Buttons, the language switch, icon buttons, the GitHub link, checkboxes. */
+/* 按钮、语言切换、图标按钮、GitHub 链接、复选框。 */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   height: 36px; padding: 0 16px; border-radius: var(--radius-sm);
@@ -16,7 +16,7 @@
 
 .seg { display: flex; padding: 2px; border: 1px solid var(--line); border-radius: var(--radius-sm); }
 .seg button {
-  border: 0; background: none; height: 24px; padding: 0 8px; border-radius: 6px;
+  border: 0; background: none; height: 24px; padding: 0 8px; border-radius: 6px; white-space: nowrap;
   font-size: 12px; color: var(--dim); cursor: pointer; transition: color 150ms var(--ease), background-color 150ms var(--ease);
 }
 .seg button:hover { color: var(--fg); }

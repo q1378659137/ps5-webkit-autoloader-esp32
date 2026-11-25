@@ -7,7 +7,7 @@ import { boardThumb } from "../boards/art.js";
 import { BOARD_NAME, CHIP_OF, IMAGE_OF, imagePath } from "./catalog.js";
 import { payloadLabel, selected } from "./release.js";
 
-// Once a chip answers, only boards that carry it stay pickable.
+// 芯片一应答，就只留下用这颗芯片的板型可选。
 export function renderBoards(root, onPick) {
   const fits = (id) => !state.busy && (!session.chip || CHIP_OF[id] === session.chip);
   root.replaceChildren(...Object.keys(CHIP_OF).map((id) => {

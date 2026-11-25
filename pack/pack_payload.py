@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Stage itsPLK/ps5-webkit-autoloader v0.7+ into host/packed.
+"""Stage q1378659137/ps5-webkit-autoloader v0.7+ into host/packed.
 
 v0.7 replaced the two monolithic HTML bundles with a modular AppCache tree
 and a separate installer ELF. The ESP32 serves that setup page. After the
@@ -100,7 +100,7 @@ def prepare_tree(web: Path) -> None:
          "third_party/ps5-elfldr",
          "third_party/ps5-unified-autoloader",
          "third_party/ps5-webkit-remote-loader"], cwd=web)
-    # 0.8.0 nests Wobkot inside the remote loader; older refs have nothing to fetch here.
+    # 0.8.0 把 Wobkot 嵌进了 remote loader；更早的 ref 这里没有东西可抓。
     run(["git", "submodule", "update", "--init", "--recursive"],
         cwd=web / "third_party" / "ps5-webkit-remote-loader")
     for name in ("ps5-elfldr", "ps5-unified-autoloader"):
@@ -123,7 +123,7 @@ def prepare_tree(web: Path) -> None:
 
 def download_installer(web: Path, tag: str) -> Path:
     dest = web / "build" / "deps" / f"webkit-autoloader-installer_{tag}.elf"
-    release = json.loads(fetch(f"https://api.github.com/repos/itsPLK/ps5-webkit-autoloader/releases/tags/{tag}"))
+    release = json.loads(fetch(f"https://api.github.com/repos/q1378659137/ps5-webkit-autoloader/releases/tags/{tag}"))
     asset = next((a for a in release.get("assets", []) if a.get("name") == dest.name), None)
     if asset is None:
         raise SystemExit(f"release {tag} has no {dest.name}")

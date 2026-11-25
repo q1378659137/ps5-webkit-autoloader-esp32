@@ -38,7 +38,7 @@ static void logHttpRequest()
 
 static void httpNetworkTestHandler()
 {
-    portalLogHeap("HTTP network test");
+    portalLogHeap("网络连通性测试");
     logHttpRequest();
     Serial.printf("[HTTP] content_len=%d\n", webServer.client().available());
     setHttpNoCacheHeaders();
@@ -47,7 +47,7 @@ static void httpNetworkTestHandler()
 
 static void httpFileHandler()
 {
-    portalLogHeap("HTTP file begin");
+    portalLogHeap("开始发送文件");
     logHttpRequest();
 
     String path = portalNormalizePath(webServer.uri().c_str());
@@ -99,7 +99,7 @@ static void httpFileHandler()
         else
         {
             Serial.print("\n");
-            webServer.send(404, "text/plain", "404 Not Found");
+            webServer.send(404, "text/plain; charset=utf-8", "404：页面不存在");
         }
         return;
     }
@@ -112,7 +112,7 @@ static void httpFileHandler()
         file.close();
         setHttpNoCacheHeaders();
         webServer.send(200, "text/cache-manifest; charset=utf-8", manifest);
-        portalLogHeap("HTTP manifest end");
+        portalLogHeap("清单发送完成");
         return;
     }
 
@@ -121,7 +121,7 @@ static void httpFileHandler()
 
     webServer.streamFile(file, contentType);
     file.close();
-    portalLogHeap("HTTP file end");
+    portalLogHeap("文件发送完成");
 }
 
 void portalStartHttp()
@@ -170,7 +170,7 @@ void portalStartHttp()
 
     webServer.onNotFound(httpFileHandler);
     webServer.begin();
-    Serial.println("HTTP: OK");
+    Serial.println("HTTP 已启动");
 }
 
 void portalProcessHttp()

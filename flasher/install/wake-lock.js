@@ -1,4 +1,4 @@
-// Keeps the screen on during a write so the laptop does not sleep mid-flash.
+// 写入期间保持屏幕常亮，免得笔记本在刷写中途睡着。
 let lock = null;
 
 export async function holdAwake() {

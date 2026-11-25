@@ -19,7 +19,7 @@ export const session = {
   chip: "",
 };
 
-// Native USB boards reject DTR/RTS; that is not an error for us.
+// 原生 USB 的板子不接受 DTR/RTS，这对我们不算错误。
 function ignoreMissingSignals(transport) {
   const wrap = (fn) => async function (...args) {
     try { return await fn.apply(this, args); }
@@ -33,7 +33,7 @@ function ignoreMissingSignals(transport) {
   transport.setSignals = wrap(transport.setSignals);
 }
 
-// esptool-js reports chip details only as log lines.
+// esptool-js 只把芯片信息当日志行输出。
 function capture(line) {
   const s = String(line).trim();
   const chip = s.match(/^Chip is (.+)$/i);
@@ -70,9 +70,9 @@ export async function openSession() {
   ignoreMissingSignals(session.transport);
   session.loader = new ESPLoader({
     transport: session.transport,
-    // USB-serial bridges (CP2102, CH340) start at 115200 and switch up once the stub runs:
-    // 460800 writes the 4 MB image about four times faster and every common bridge handles it.
-    // Native USB ignores the baud rate, so it stays put there.
+    // USB 串口桥（CP2102、CH340）先按 115200 连，跑起 stub 后再升速：
+    // 460800 写 4 MB 镜像大约快四倍，常见桥片都吃得下。
+    // 原生 USB 不看波特率，所以那边保持不动。
     baudrate: session.nativeUsb ? 115200 : 460800,
     romBaudrate: 115200,
     terminal: {

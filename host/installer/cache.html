@@ -1,14 +1,14 @@
 <!doctype html>
-<html lang="en" manifest="/cache.appcache">
+<html lang="zh-CN" manifest="/cache.appcache">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WebKit Autoloader Installer v[[VERSION_PLACEHOLDER]] by PLK (built [[BUILD_TIME_PLACEHOLDER]])</title>
+  <title>WebKit Autoloader 安装器 v[[VERSION_PLACEHOLDER]]（PLK 构建，[[BUILD_TIME_PLACEHOLDER]]）</title>
   <style>
     * { margin: 0; padding: 0; -webkit-box-sizing: border-box; box-sizing: border-box; }
     html, body { height: 100%; }
     body {
-      font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
       background: #0f172a;
       color: #e2e8f0;
       display: -webkit-box;
@@ -57,15 +57,15 @@
 <body>
   <main>
     <img class="logo" src="/logo.svg" alt="WebKit Autoloader">
-    <h1>WebKit Autoloader Installer</h1>
-    <p id="status">Caching content...</p>
-    <p id="detail">Please wait a moment. Do not close this page yet!</p>
-    <div id="progress" role="progressbar" aria-label="Cache download" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <h1>WebKit Autoloader 安装器</h1>
+    <p id="status">正在缓存内容…</p>
+    <p id="detail">请稍等片刻，先不要关闭这个页面！</p>
+    <div id="progress" role="progressbar" aria-label="缓存下载进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
       <div id="progressBar"></div>
       <div id="percent">0%</div>
     </div>
   </main>
-  <footer id="footer">WebKit Autoloader Installer v[[VERSION_PLACEHOLDER]] by PLK (built [[BUILD_TIME_PLACEHOLDER]])<br>This project is free and open source: github.com/itsPLK/ps5-webkit-autoloader</footer>
+  <footer id="footer">WebKit Autoloader 安装器 v[[VERSION_PLACEHOLDER]]（PLK 构建，[[BUILD_TIME_PLACEHOLDER]]）<br>本项目免费开源：github.com/q1378659137/ps5-webkit-autoloader</footer>
   <script>
   (function () {
     var status = document.getElementById('status');
@@ -92,7 +92,7 @@
       failed = true;
       status.textContent = message;
       status.className = 'error';
-      detail.textContent = 'Connect to the ESP32 and reload this page to retry.';
+      detail.textContent = '请连上 ESP32，然后重新加载本页再试一次。';
       progress.className = 'error';
     }
 
@@ -100,22 +100,22 @@
       if (failed || ready) return;
       ready = true;
       setProgress(100);
-      status.textContent = 'Verifying offline cache...';
+      status.textContent = '正在校验离线缓存…';
       fetch('/app/' + version + '/__complete__')
         .then(function (response) { return response.text(); })
         .then(function (marker) {
-          if (marker.trim() !== version) throw new Error('Cache incomplete. Run the installer again.');
-          status.textContent = 'Offline cache ready';
+          if (marker.trim() !== version) throw new Error('缓存不完整。请再运行一次安装器。');
+          status.textContent = '离线缓存已就绪';
           status.className = 'success';
           progress.className = 'success';
-          detail.textContent = 'Starting the installer. Leave this page open.';
+          detail.textContent = '正在启动安装器，请保持本页打开。';
           location.replace('/app/index.html');
         })
-        .catch(function (error) { fail(error.message || 'Cache incomplete. Run the installer again.'); });
+        .catch(function (error) { fail(error.message || '缓存不完整。请再运行一次安装器。'); });
     }
 
     if (!cache) {
-      status.textContent = 'This browser does not support offline AppCache.';
+      status.textContent = '这个浏览器不支持离线 AppCache。';
       detail.textContent = '';
       progress.style.display = 'none';
       return;
@@ -138,11 +138,11 @@
     cache.addEventListener('error', function () {
       if (failed || ready) return;
       fail(downloading
-        ? 'Cache download failed. Run the installer again.'
-        : 'The offline cache could not be checked. Run the installer again.');
+        ? '缓存下载失败。请再运行一次安装器。'
+        : '离线缓存校验失败。请再运行一次安装器。');
     });
     cache.addEventListener('obsolete', function () {
-      fail('The cached manifest was superseded. Re-run the installer to finish.');
+      fail('缓存的清单已被更新取代。请重新运行安装器以完成。');
     });
   })();
   </script>

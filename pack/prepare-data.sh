@@ -42,9 +42,9 @@ minimize_file() {
 
     case "$file" in
         *.js)
-            # Terser only reformats here; compression and name mangling are opt-in.
-            # Payload snippets use a top-level return, and the loader modules use
-            # import/export. Neither parses as a classic script, so leave those as-is.
+            # 这里 Terser 只做重排版，压缩和改名都是可选项。
+            # payload 片段用了顶层 return，loader 模块用的是
+            # import/export。两者都按普通脚本解析不了，所以原样留着。
             if ! terser "$file" --output "$tmp_file" >/dev/null 2>&1; then
                 rm -f "$tmp_file"
                 echo "Leaving unchanged (not a classic script): $file"
@@ -100,7 +100,7 @@ if [ "$MODE" = minimize ]; then
     \) -print0)
 else
     echo "Compressing minimized files for LittleFS..."
-    # AppCache manifests stay plain for dynamic ESP32 version responses.
+    # AppCache 清单保持明文，因为 ESP32 会动态返回版本。
     while IFS= read -r -d '' file; do
         gzip -9 -n "$file"
     done < <(find "$OUTPUT_DIR" -type f \( \

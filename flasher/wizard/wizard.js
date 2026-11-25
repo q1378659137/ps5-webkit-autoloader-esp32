@@ -36,7 +36,7 @@ export function renderWizard(go) {
   actions(s);
   $("meter").hidden = !(state.phase === "installing" || state.phase === "connecting") || state.view !== "install";
 
-  // Replay the entrance only when the screen itself changes.
+  // 只有换屏时才重放进入动画。
   const key = `${state.view}:${s.scene}:${s.title}`;
   if (key !== shown) {
     shown = key;
@@ -46,7 +46,7 @@ export function renderWizard(go) {
   }
 }
 
-// "Board not showing up?": opens under the button, closes on the next screen.
+// 「开发板没被识别？」：在按钮下方展开，进入下一屏时收起。
 export function toggleExtra(content) {
   const box = $("wiz-extra");
   const open = box.hidden;

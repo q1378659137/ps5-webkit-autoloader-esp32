@@ -16,7 +16,7 @@ import sys
 
 
 def js_json(value):
-    # Match upstream tools/build_standalone.py and protect script closing tags.
+    # 与上游 tools/build_standalone.py 保持一致，并保护 script 的闭合标签。
     return json.dumps(value, ensure_ascii=False).replace("</", "<\\/")
 
 
@@ -57,7 +57,7 @@ def convert_page(html, version_dir):
     base = "/app/" + version_dir.name + "/"
     embedded = assignment(html, "EMBEDDED_BINARIES", required=False)
     if embedded is None:
-        # A repeated run verifies extracted files instead of rewriting the page.
+        # 重复运行只校验已抽出的文件，不再重写页面。
         metadata = assignment(html, "EXTERNAL_BINARY_INFO")[2]
         files = {}
         for url, info in metadata.items():
@@ -105,8 +105,8 @@ def convert_page(html, version_dir):
         raise ValueError("expected one autoload payload argument referencing the embedded ELF")
     edits.append((queue[0], queue[1], "  window.STANDALONE = " + js_json(queue[2]) + ";\n"))
 
-    # No embedded table means native fetch stays intact. Suppress the upstream
-    # standalone warning: these pages deliberately use external cached files.
+    # 没有内嵌表说明原生 fetch 保持原样。这里压掉上游那条
+    # standalone 警告：这些页面是故意用外部缓存文件的。
     modules = assignment(html, "__modules")
     region = html[modules[0]:modules[1]]
     matches = list(re.finditer(r'"src/site\.js"\s*:\s*', region))
@@ -177,7 +177,7 @@ def main():
         path = root / name
         changes[path] = update_manifest(path.read_bytes().decode("utf-8"), base, resources).encode("utf-8")
 
-    # Validate everything above before any write. Keep backups OUTSIDE LittleFS.
+    # 写任何东西之前先把上面全部校验一遍。备份要放在 LittleFS 之外。
     changes = {path: data for path, data in changes.items() if not path.exists() or path.read_bytes() != data}
     backup_dir = root.parent / (root.name + "-externalize-backup") / version_dir.name
     for path in changes:

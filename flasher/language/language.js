@@ -1,8 +1,9 @@
 import { state } from "../app/state.js";
 import { en } from "./en.js";
 import { es } from "./es.js";
+import { zh } from "./zh.js";
 
-const STRINGS = { en, es };
+const STRINGS = { en, es, zh };
 
 const LANGS = Object.keys(STRINGS);
 

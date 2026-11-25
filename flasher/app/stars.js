@@ -1,7 +1,7 @@
-const API = "https://api.github.com/repos/percdotdev/ps5-webkit-autoloader-esp32";
+const API = "https://api.github.com/repos/q1378659137/ps5-webkit-autoloader-esp32";
 const KEY = "stars:v1";
 
-// GitHub allows 60 anonymous calls an hour, so ask once per tab.
+// GitHub 匿名调用每小时限 60 次，所以每个标签页只问一次。
 async function loadStars() {
   try {
     const hit = sessionStorage.getItem(KEY);
@@ -26,7 +26,7 @@ function compact(n, lang) {
   }
 }
 
-// Fills the count next to the GitHub icon; leaves the icon alone when GitHub is unreachable.
+// 把星标数填到 GitHub 图标旁边；连不上 GitHub 就只留图标。
 export async function showStars(link, lang) {
   const n = await loadStars();
   if (n == null) return;

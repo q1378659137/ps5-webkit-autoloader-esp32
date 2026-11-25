@@ -3,13 +3,13 @@ import { serialOk } from "../device/session.js";
 import { BOARD_NAME } from "../firmware/catalog.js";
 import { t } from "../language/language.js";
 
-// The five screens, in order. The LEDs light up along this list.
+// 五屏，按顺序排。LED 就按这张表逐个点亮。
 export const VIEWS = ["plug", "install", "move", "wifi", "guide"];
 
 const PAYLOAD = "https://github.com/itsPLK/ps5-webkit-autoloader#readme";
 
-// What one screen shows: the board's scene, the words, and at most one main button.
-// `go` holds the actions: install, next, back, again, help, log, copyLink.
+// 一屏显示什么：开发板场景、文案，最多一个主按钮。
+// `go` 里放动作：install、next、back、again、help、log、copyLink。
 export function step(go) {
   const v = state.view;
   if (!serialOk) {

@@ -31,7 +31,7 @@ window.loaderHud = {
         hudAddr.textContent = hudState.port ? `${hudState.ip}:${hudState.port}` : `${hudState.ip}`;
       }
     }
-    if (hudFw) hudFw.textContent = `FW ${hudState.fw}`;
+    if (hudFw) hudFw.textContent = `固件 ${hudState.fw}`;
   },
   setWaiting() {},
   setRunning(info = {}) {
@@ -232,8 +232,8 @@ async function run() {
   } else {
     writeLog(`PS5 WebKit Remote Loader v${LOADER_VERSION}`, "info");
   }
-  writeLog(`Agent: ${navigator.userAgent}`, "info");
-  writeLog(`Firmware: ${window.fw_str || "detecting"}`, "info");
+  writeLog(`UA：${navigator.userAgent}`, "info");
+  writeLog(`固件：${window.fw_str || "检测中"}`, "info");
 
   if (window.loaderHud) {
     // A standalone page never opens a port, so hide the IP/port and display the FW.
@@ -255,7 +255,7 @@ async function run() {
 
   writeLog("Starting Wobkot userland");
   const { p, chain } = await window.wobkot.initialize();
-  writeLog(`Firmware: ${window.fw_str}`, "info");
+  writeLog(`固件：${window.fw_str}`, "info");
   if (window.loaderHud) {
     window.loaderHud.setTarget(standalone ? null : "127.0.0.1", standalone ? null : 9027, window.fw_str);
   }

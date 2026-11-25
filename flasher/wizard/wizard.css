@@ -1,4 +1,4 @@
-/* One step at a time: the board, a row of LEDs, one sentence, one button. */
+/* 一次一步：开发板、一排 LED、一句话、一个按钮。 */
 .wiz {
   width: min(560px, 100%);
   display: grid; justify-items: center; text-align: center; gap: 0;
@@ -9,7 +9,7 @@
 }
 .art-box .art { height: 100%; width: auto; max-width: 100%; overflow: hidden; }
 
-/* Signature: progress as board LEDs. Lit copper for now, green once done. */
+/* 记号：用板上的 LED 表示进度。进行中是亮铜色，完成变绿。 */
 .leds { list-style: none; margin: 0 0 20px; padding: 0; display: flex; gap: 8px; }
 .leds li {
   width: 8px; height: 8px; border-radius: 50%; background: var(--line-2);
@@ -44,7 +44,7 @@
 .wiz-extra ul { margin: 0; padding-left: 16px; display: grid; gap: 4px; }
 .wiz-extra p { margin: 0; }
 
-/* Progress: takes the button's place and fills up like one, copper from the left. */
+/* 进度：占住按钮的位置，像按钮一样填满，铜色从左往右。 */
 .meter {
   position: relative; overflow: hidden; margin-top: 28px;
   width: min(320px, 100%); height: 48px; border-radius: 12px;
@@ -60,12 +60,12 @@
 .meter-tx, .meter-pct { position: relative; font-size: 14px; }
 .meter-tx { color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .meter-pct { color: var(--dim); font: 400 13px/1 var(--mono); font-variant-numeric: tabular-nums; }
-/* No percentage yet: a short band sweeps across instead. */
+/* 还没有百分比时：用一段短光带扫过去。 */
 .meter[data-indeterminate="true"] .meter-fill { right: auto; width: 30%; border-right: 0; animation: sweep 1.4s var(--ease) infinite; }
 @keyframes sweep { from { transform: translateX(-100%); } to { transform: translateX(340%); } }
 .meter[data-tone="ok"] .meter-fill { background: color-mix(in srgb, var(--ok) 22%, transparent); border-color: var(--ok); }
 
-/* Each new step fades and rises a little. */
+/* 每一屏切换时淡入并轻轻上浮。 */
 .wiz[data-enter] .wiz-title, .wiz[data-enter] .wiz-body, .wiz[data-enter] .wiz-actions { animation: rise 400ms var(--ease) both; }
 .wiz[data-enter] .wiz-body { animation-delay: 40ms; }
 .wiz[data-enter] .wiz-actions { animation-delay: 80ms; }

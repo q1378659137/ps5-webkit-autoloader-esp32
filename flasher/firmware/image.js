@@ -1,6 +1,6 @@
 import { t } from "../language/language.js";
 
-// Rejects tiny files and HTML error pages served in place of a binary.
+// 挡掉过小的文件，以及拿 HTML 错误页冒充二进制的响应。
 export function checkImage(buf) {
   if (buf.length < 1024 || buf[0] === 0x3c) throw new Error(t("badbin"));
 }

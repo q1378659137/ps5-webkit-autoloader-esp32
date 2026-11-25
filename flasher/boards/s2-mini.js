@@ -1,11 +1,11 @@
 import { INK, pcb, holes, chip, smd, crystal, button, usbC, traceAntenna, text } from "./parts.js";
 
-// Lolin / TENSTAR S2 Mini: purple, 25.4 x 34.3 mm, two pin rows per side.
+// Lolin / TENSTAR S2 Mini：紫色，25.4 x 34.3 mm，每侧两排针。
 const W = 25.4, H = 34.3;
 const PCB = "#5a2a72";
 
 const TRACE = "#7b429a";
-// Copper under the solder mask: [what it carries, path, pulse delay in s].
+// 阻焊层下的铜箔：[承载什么, 路径, 脉冲延迟（秒）]。
 const TRACES = [
   ["usb", "M12.1 29.8 V24 L11.4 23.3 V19.3"],
   ["usb", "M13.3 29.8 V24 L14.0 23.3 V19.3", 0.12],

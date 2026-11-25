@@ -1,4 +1,4 @@
-/* Board picker, version switch, release line, file drop. */
+/* 板型选择器、版本切换、发行版信息行、文件拖放区。 */
 .boards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 .board {
   display: grid; grid-template-columns: 48px minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 12px; align-items: center;

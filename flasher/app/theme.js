@@ -1,4 +1,4 @@
-// The saved theme is applied before paint by the inline script in index.html.
+// 保存的主题由 index.html 里的内联脚本在首次绘制前套上。
 export function currentTheme() {
   const set = document.documentElement.dataset.theme;
   if (set) return set;

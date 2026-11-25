@@ -28,27 +28,27 @@ void setup()
     portalPrepareHttpsDebug();
 
     Serial.printf(
-        "Arduino ESP32: %d.%d.%d\n",
+        "Arduino ESP32 版本: %d.%d.%d\n",
         ESP_ARDUINO_VERSION_MAJOR,
         ESP_ARDUINO_VERSION_MINOR,
         ESP_ARDUINO_VERSION_PATCH
     );
-    Serial.print("IDF version: ");
+    Serial.print("IDF 版本: ");
     Serial.println(IDF_VER);
-    Serial.printf("Flash size: %d MB\n", ESP.getFlashChipSize()/1024/1024);
+    Serial.printf("闪存容量: %d MB\n", ESP.getFlashChipSize()/1024/1024);
     Serial.println();
-    Serial.println("BOOT");
+    Serial.println("启动完成，开始初始化");
 
     portalMountStorage();
     portalStartAccessPoint();
     portalStartDns();
     portalSeedManifestVersion();
 
-    Serial.println("Starting WebServer");
+    Serial.println("正在启动 Web 服务");
     portalStartHttp();
-    Serial.println("Starting HTTPS Server");
+    Serial.println("正在启动 HTTPS 服务");
     portalStartHttps();
-    Serial.println("READY");
+    Serial.println("准备就绪");
     portalLedReady();
 }
 

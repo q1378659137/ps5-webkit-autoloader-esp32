@@ -18,7 +18,7 @@ function esc(s) {
   return String(s).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 }
 
-// Copy text with a few product words styled.
+// 复制文本，其中几个产品名带样式。
 export function rich(text) {
   return esc(text)
     .replaceAll("ESP32_PORTAL", "<code translate=\"no\">ESP32_PORTAL</code>")

@@ -4,15 +4,15 @@
 
 [![Flasher web: conecta la placa y pulsa Instalar](flasher/share/og.png)](https://percdotdev.github.io/ps5-webkit-autoloader-esp32/?lang=es)
 
-Esto convierte una placa ESP32 barata en un punto de acceso Wi-Fi. Conectas la placa a la PS5, te unes a esa red y abres la **Guía del usuario** oficial. La guía carga una página desde la placa (no desde internet). Esa página instala [itsPLK/ps5-webkit-autoloader](https://github.com/itsPLK/ps5-webkit-autoloader). Después, **Multimedia → WebKit Autoloader** abre Payload Manager.
+Esto convierte una placa ESP32 barata en un punto de acceso Wi-Fi. Conectas la placa a la PS5, te unes a esa red y abres la **Guía del usuario** oficial. La guía carga una página desde la placa (no desde internet). Esa página instala [q1378659137/ps5-webkit-autoloader](https://github.com/q1378659137/ps5-webkit-autoloader). Después, **Multimedia → WebKit Autoloader** abre Payload Manager.
 
 Úsalo en una consola tuya. El homebrew y los exploits de WebKit pueden incumplir los términos de Sony. La consola o la cuenta de PSN pueden ser baneadas si esa consola se conecta a internet. Este proyecto no te oculta de Sony.
 
-Qué versiones del software de la PS5 funcionan, y qué exploit se usa en cada una, depende del payload. Consulta el [README de itsPLK](https://github.com/itsPLK/ps5-webkit-autoloader#readme).
+Qué versiones del software de la PS5 funcionan, y qué exploit se usa en cada una, depende del payload. Consulta el [README de itsPLK](https://github.com/q1378659137/ps5-webkit-autoloader#readme).
 
 ## Qué necesitas
 
-- Una PS5 en una versión que soporte el payload ([lista](https://github.com/itsPLK/ps5-webkit-autoloader#readme))
+- Una PS5 en una versión que soporte el payload ([lista](https://github.com/q1378659137/ps5-webkit-autoloader#readme))
 - Una placa ESP32 con puerto USB: **ESP32-S2 Mini** (TENSTAR y similares), ESP32-S3, ESP32-C3, ESP32 DevKit (WROOM-32 / ESP-32S, la típica de 30 o 38 pines) o ESP32-PICO
 - Un cable USB de datos, no uno que solo carga
 - Chrome o Edge en un PC para grabar el firmware (Firefox y Safari no pueden)
@@ -68,11 +68,11 @@ Solo Arduino-ESP32 **2.0.11**. Las imágenes quedan en `build/{pico,devkit,s2,s3
 
 ## Problemas
 
-¿Algo falla con el flasher, la placa o `ESP32_PORTAL`? [Abre un issue](https://github.com/percdotdev/ps5-webkit-autoloader-esp32/issues/new/choose) y pega el log del flasher (Instalar → Registro → Copiar). Los problemas del payload van a [itsPLK](https://github.com/itsPLK/ps5-webkit-autoloader/issues).
+¿Algo falla con el flasher, la placa o `ESP32_PORTAL`? [Abre un issue](https://github.com/percdotdev/ps5-webkit-autoloader-esp32/issues/new/choose) y pega el log del flasher (Instalar → Registro → Copiar). Los problemas del payload van a [itsPLK](https://github.com/q1378659137/ps5-webkit-autoloader/issues).
 
 ## Créditos
 
-Payload: [itsPLK](https://github.com/itsPLK/ps5-webkit-autoloader). Cadenas: [slopkit](https://github.com/jordyidk/slopkit), [Relapse](https://github.com/ntfargo/Relapse-Exploit). Flasher: [esptool-js](https://github.com/espressif/esptool-js).
+Payload: [itsPLK](https://github.com/q1378659137/ps5-webkit-autoloader). Cadenas: [slopkit](https://github.com/jordyidk/slopkit), [Relapse](https://github.com/ntfargo/Relapse-Exploit). Flasher: [esptool-js](https://github.com/espressif/esptool-js).
 
 ## Licencia
 

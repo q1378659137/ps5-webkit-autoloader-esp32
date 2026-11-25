@@ -1,4 +1,4 @@
-/* Tokens, reset, shared keyframes.
+/* 变量、reset、共用的关键帧。
    A night workbench: ink neutrals keep the chrome quiet, copper from the board traces is
    the one accent, and the board in the middle is the only rich colour on screen. */
 :root {
@@ -23,7 +23,8 @@
   --radius: 16px;
   --radius-sm: 10px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --sans: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sans: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Source Han Sans SC", sans-serif;
   --mono: "Geist Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
   color-scheme: dark;
 }

@@ -1,7 +1,7 @@
 import { t } from "../language/language.js";
 import { state } from "./state.js";
 
-// Static copy in index.html: element id -> string key.
+// index.html 里的静态文案：元素 id -> 文案键。
 const TEXT = {
   "skip": "skip",
   "open-adv": "adv",
@@ -19,7 +19,8 @@ const TEXT = {
 };
 
 export function renderPageText() {
-  document.documentElement.lang = state.lang;
+  // 中文写成 zh-CN：浏览器据此挑简体字形（上游只写 zh）
+  document.documentElement.lang = state.lang === "zh" ? "zh-CN" : state.lang;
   for (const [id, key] of Object.entries(TEXT)) {
     document.getElementById(id).textContent = t(key);
   }

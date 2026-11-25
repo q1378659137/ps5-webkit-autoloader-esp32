@@ -16,7 +16,7 @@ export function clearLog() {
   document.getElementById("log")?.replaceChildren();
 }
 
-// kind: "" | "hi" (worth reading) | "bad" (error)
+// kind: "" | "hi"（值得一看）| "bad"（错误）
 export function logLine(raw, kind) {
   const row = formatLine(raw);
   if (!row) return;
